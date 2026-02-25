@@ -112,10 +112,17 @@ def chart_wind_over_time(df: pd.DataFrame) -> alt.Chart:
     return (
         alt.Chart(df)
         .mark_line()
+        .transform_window(
+            rolling_wind="mean(wind)",
+            frame=[-7, 0], 
+            sort=[{"field": "date"}])
         .encode(
             x=alt.X("date:T", title="Date"),
-            y=alt.Y("wind:Q", title="Wind Speed (mph)"),
-            tooltip=[alt.Tooltip("date:T"), alt.Tooltip("wind:Q", format=".1f")],
-        )
-        .properties(height=320)
-    )
+            y=alt.Y("rolling_wind:Q", title="7-Day Avg Wind Speed (mph)"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("rolling_wind:Q", format=".1f", title="Avg Wind Speed")
+            ],)
+        .properties(
+            height=320, 
+            title="Seattle Wind Trends (7-Day Rolling Average)"))
