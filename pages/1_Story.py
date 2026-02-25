@@ -38,3 +38,9 @@ st.header("4) Precipitation vs temperature")
 st.write("We wish to test a plausible explanation: are the warmest days also the driest (or not)?")
 st.altair_chart(chart_explain_precip_vs_temp(df), use_container_width=True)
 st.caption("Takeaway: The relationship is noisy — precipitation alone does not explain extreme heat, motivating more fine-grained exploration.")
+
+st.header("5) Average daily wind speeds over time")
+st.write("Next, we examine the average daily wind speeds over the course of all years.")
+st.altair_chart(chart_wind_over_time(df), use_container_width=True)
+st.caption("Takeaway: ")
+

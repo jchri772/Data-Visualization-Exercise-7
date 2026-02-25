@@ -107,3 +107,15 @@ def chart_dashboard(df: pd.DataFrame) -> alt.Chart:
     )
 
     return alt.vconcat(line, hist).resolve_scale(color="independent")
+
+def chart_wind_over_time(df: pd.DataFrame) -> alt.Chart:
+    return (
+        alt.Chart(df)
+        .mark_line()
+        .encode(
+            x=alt.X("date:T", title="Date"),
+            y=alt.Y("wind:Q", title="Wind Speed (mph)"),
+            tooltip=[alt.Tooltip("date:T"), alt.Tooltip("wind:Q", format=".1f")],
+        )
+        .properties(height=320)
+    )
