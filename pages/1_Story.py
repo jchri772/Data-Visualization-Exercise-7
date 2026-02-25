@@ -41,7 +41,7 @@ st.altair_chart(chart_explain_precip_vs_temp(df), use_container_width=True)
 st.caption("Takeaway: The relationship is noisy — precipitation alone does not explain extreme heat, motivating more fine-grained exploration.")
 
 st.header("5) Average daily wind speeds over time")
-st.write("Next, we examine the average daily wind speeds over the course of all years.")
+st.write("Next, we examine the average 7-day rolling average wind speeds over the course of the entire timeframe.")
 st.altair_chart(chart_wind_over_time(df), use_container_width=True)
-st.caption("Takeaway: ")
+st.caption("Takeaway: Wind speeds in Seattle are generally highly variable throughout the year but are generally higher in the winter than in the summer.")
 
