@@ -126,3 +126,25 @@ def chart_wind_over_time(df: pd.DataFrame) -> alt.Chart:
         .properties(
             height=320, 
             title="Seattle Wind Trends (7-Day Rolling Average)"))
+
+def chart_dashboard(df: pd.DataFrame) -> alt.Chart:
+    weather_types = sorted(df["weather"].unique())
+
+    w_select = alt.selection_point(
+        fields=["weather"],
+        bind=alt.binding_select(options=weather_types, name="Weather: "),
+    )
+    scatterplot = (
+        alt.Chart(df)
+        .mark_point()
+        .encode(
+            x=alt.X("temp_min:Q", title="Daily min temp (°C)"),
+            y=alt.Y("temp_max:Q", title="Daily max temp (°C)"),
+            color=alt.Color("weather:N", title="Weather Type"),
+            tooltip=[alt.Tooltip("temp_min:Q", title="Daily min temp (°C)"), alt.Tooltip("temp_max:Q", title="Daily max temp (°C)")],
+        )
+        .transform_filter(w_select)
+        .properties(height=300).add_params(w_select)
+    )
+
+    return alt.vconcat(scatterplot)

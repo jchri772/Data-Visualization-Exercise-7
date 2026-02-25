@@ -7,7 +7,8 @@ from charts.charts import (
     chart_context_seasonality,
     chart_surprise_extremes,
     chart_explain_precip_vs_temp,
-    chart_wind_over_time
+    chart_wind_over_time,
+    chart_weather_spread
 )
 
 st.set_page_config(page_title="Story", layout="wide")
@@ -44,4 +45,9 @@ st.header("5) Average daily wind speeds over time")
 st.write("Next, we examine the average 7-day rolling average wind speeds over the course of the entire timeframe.")
 st.altair_chart(chart_wind_over_time(df), use_container_width=True)
 st.caption("Takeaway: Wind speeds in Seattle are generally highly variable throughout the year but are generally higher in the winter than in the summer.")
+
+st.header("6) Spread of temperature by weather type")
+st.write("Next, we compare the distribution of temperatures across different weather types to examine if some types have more temperature variation than others.")
+st.altair_chart(chart_weather_spread(df), use_container_width=True)
+st.caption("Takeaway:")
 
