@@ -127,7 +127,7 @@ def chart_wind_over_time(df: pd.DataFrame) -> alt.Chart:
             height=320, 
             title="Seattle Wind Trends (7-Day Rolling Average)"))
 
-def chart_dashboard(df: pd.DataFrame) -> alt.Chart:
+def chart_weather_spread(df: pd.DataFrame) -> alt.Chart:
     weather_types = sorted(df["weather"].unique())
 
     w_select = alt.selection_point(
