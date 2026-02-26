@@ -134,17 +134,24 @@ def chart_weather_spread(df: pd.DataFrame) -> alt.Chart:
         fields=["weather"],
         bind=alt.binding_select(options=weather_types, name="Weather: "),
     )
+
     scatterplot = (
         alt.Chart(df)
+        .transform_calculate(temp_spread="datum.temp_max - datum.temp_min")
         .mark_point()
         .encode(
             x=alt.X("temp_min:Q", title="Daily min temp (°C)"),
-            y=alt.Y("temp_max:Q", title="Daily max temp (°C)"),
+            y=alt.Y("temp_spread:Q", title="Temp Spread (°C)"),
             color=alt.Color("weather:N", title="Weather Type"),
-            tooltip=[alt.Tooltip("temp_min:Q", title="Daily min temp (°C)"), alt.Tooltip("temp_max:Q", title="Daily max temp (°C)")],
+            tooltip=[
+                alt.Tooltip("temp_min:Q", title="Min Temp (°C)"),
+                alt.Tooltip("temp_max:Q", title="Max Temp (°C)"),
+                alt.Tooltip("temp_spread:Q", title="Spread (°C)")
+            ],
         )
         .transform_filter(w_select)
-        .properties(height=300).add_params(w_select)
+        .properties(height=300)
+        .add_params(w_select)
     )
 
     return alt.vconcat(scatterplot)
