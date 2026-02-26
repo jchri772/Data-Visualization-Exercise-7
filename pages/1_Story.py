@@ -47,7 +47,7 @@ st.altair_chart(chart_wind_over_time(df), use_container_width=True)
 st.caption("Takeaway: Wind speeds in Seattle are generally highly variable throughout the year but are generally higher in the winter than in the summer.")
 
 st.header("6) Spread of temperature by weather type")
-st.write("Next, we compare the distribution of temperatures across different weather types to examine if some types have more temperature variation than others.")
+st.write("Next, we compare the difference in the high and low temperatures with the high temperature across different weather types to examine if some types have more temperature variation throughout the day than others.")
 st.altair_chart(chart_weather_spread(df), use_container_width=True)
-st.caption("Takeaway:")
+st.caption("Takeaway: Warmer temperatures are generally associated with greater temperature variation throughout the day. It is unclear from the chart whether particular weather types are more associated with extreme temperature variation.")
 
